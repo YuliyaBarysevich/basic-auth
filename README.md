@@ -9,14 +9,15 @@
 
 1. Deployed with Heroku (2 routes)
 
-    - []()
+    - [Heroku / Sign Up](https://barysevich-basic-auth.herokuapp.com/signup)
+    - [Heroku/ Sign In](https://barysevich-basic-auth.herokuapp.com/signin)
 
 
 
 2. Github URLs
 
     - [https://github.com/YuliyaBarysevich/basic-auth/compare/dev?expand=1](https://github.com/YuliyaBarysevich/basic-auth/compare/dev?expand=1)
-    - []()
+    - [Pull Request / GitHub](https://github.com/YuliyaBarysevich/basic-auth/pull/2)
   
 ### User Stories 
 
@@ -40,11 +41,12 @@
 - **.env requirements** 
 i.e.
   - PORT - Port Number
+  - MONGODB_URI = `mongodb://localhost:27017/auth`
 
 ### How to initialize/run your application
 
 - Download all dependencies `npm install`
-- Create **.env** file and assign **PORT** variable to 3000
+- Create **.env** file and assign **PORT** variable to 3000 and **MONGODB_URI** 
 - Run command `nodemon` in terminal to start app on localhost:3333
 - To run tests, run command `npm run test` in terminal
 
