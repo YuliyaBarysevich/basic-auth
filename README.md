@@ -15,7 +15,7 @@
 
 2. Github URLs
 
-    - []()
+    - [https://github.com/YuliyaBarysevich/basic-auth/compare/dev?expand=1](https://github.com/YuliyaBarysevich/basic-auth/compare/dev?expand=1)
     - []()
   
 ### User Stories 

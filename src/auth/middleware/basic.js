@@ -33,8 +33,8 @@ module.exports = async (req, res, next) => {
    console.log(user)
    const valid = await bcrypt.compare(password, user.password);
    if (valid) {
-    res.status(200).json(`User : ${user}`)
-     next()
+    res.status(200).json({user : user})
+    res.end();
    }
    else {
      throw new Error('Invalid User')
