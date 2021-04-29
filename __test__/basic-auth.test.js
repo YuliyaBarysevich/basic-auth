@@ -2,11 +2,11 @@
 
 const { server } = require('../src/server')
 const supertest = require('supertest')
-const mockRequest = supertest(server);
+const supergoose = require('@code-fellows/supergoose');
+const mockRequest = supergoose(server);
 
 const Users = require('../src/auth/models/users-model')
 
-require('@code-fellows/supergoose');
 
 describe('WEB SERVER', () => {
   it ('should respond with a 404 on not found', async() => {
@@ -16,23 +16,26 @@ describe('WEB SERVER', () => {
   })
 })
 
-describe('Sign up route', () => {
-  it('should create a new user', async() => {
-    const response = await mockRequest.post('/signup').send({username: 'username', password: 'password'})
+let testUser = {username: 'testUser', password: 'testPassword'}
+
+describe('AUTH routes', () => {
+  it('should sign up a new user', async() => {
+    const response = await mockRequest.post('/signup').send(testUser)
     expect(response.status).toBe(201)
     expect(typeof response.body).toBe('object')
     console.log(response.body)
-    expect(response.body.username).toEqual('username')
+    expect(response.body.username).toEqual('testUser')
+  })
+
+  it('should sign in a user', async() => {
+     const response = await mockRequest.post('/signin')
+       .auth(testUser.username, testUser.password)
+     
+    expect(response.status).toBe(200);
+    expect(response.body.username).toEqual(testUser.username)
   })
 })
 
-// describe('Sign in route', () => {
-//   it('should sign in a user', async() => {
-//     //  const request = await mockRequest.post('/signup').send({username: 'username', password: 'password'})
-//      const response = await mockRequest.post('/signin').send({username: 'username', password: 'password'})
-//      console.log(response.body)
-//     // expect(response.status).toBe(200);
-//   })
-// })
+
 
 
