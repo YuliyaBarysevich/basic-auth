@@ -1,11 +1,21 @@
 'use strict'
 
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
-const usersSchema = mongoose.Schema({
+const users = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true }
 });
-const Users = mongoose.model('users', usersSchema);
 
-module.exports = Users;
+users.statics.authenticateBasic = async function (username, password){
+  const user = await this.findOne({ username: username })
+  const valid = await bcrypt.compare(password, user.password);
+  if(valid){
+    return user
+  }else {
+    throw new Error('Invalid User')
+  }
+}
+module.exports = mongoose.model('users', users);
+

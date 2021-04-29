@@ -1,8 +1,8 @@
 'use strict'
 
-const bcrypt = require('bcrypt');
+
 const base64 = require('base-64');
-const Users = require('../models/users-model')
+const User = require('../models/users-model')
 
 module.exports = async (req, res, next) => {
 
@@ -29,18 +29,9 @@ module.exports = async (req, res, next) => {
    3. Either we're valid or we throw an error
  */
  try {
-   const user = await Users.findOne({ username: username })
-   console.log(user)
-   const valid = await bcrypt.compare(password, user.password);
-   if (valid) {
-    res.status(200).json({user : user})
-    res.end();
-   }
-   else {
-     throw new Error('Invalid User')
-   }
+   req.user = await User.authenticateBasic(username, password)
+   next()
  } catch (error) { res.status(403).send("Invalid Login"); }
- next()
 
 }
 
